@@ -2,7 +2,7 @@ import * as comidasModel from './../models/comidasModels.js';
 
 export const listAll = async (req, res) => {
     try {
-        const comidas = await comidas.findAll();
+        const comidas = await comidasModel.findAll();
 
         if (!comidas || comidas.length === 0) {
             res.status(404).json({
@@ -30,7 +30,7 @@ export const listAll = async (req, res) => {
 export const listOne = async (req, res) => {
     try {
         const id = req.params.id;
-        const comida = await comidasModel.findById(id);
+        const comida = await comidasModel.findOne(id);
 
         if (!comida) {
             return res.status(404).json({
@@ -92,7 +92,7 @@ export const deletar = async (req, res) => {
     try {
         const id = parseInt(req.params.id);
 
-        const comidaExiste = await comidasModel.findById(id);
+        const comidaExiste = await comidasModel.findOne(id);
 
         if (!comidaExiste) {
             return res.status(404).json({
@@ -121,7 +121,7 @@ export const atualizar = async (req, res) => {
         const id = parseInt(req.params.id);
         const dados = req.body;
 
-        const comidaExiste = await comidasModel.findById(id);
+        const comidaExiste = await comidasModel.findOne(id);
 
         if (!comidaExiste) {
             return res.status(404).json({
